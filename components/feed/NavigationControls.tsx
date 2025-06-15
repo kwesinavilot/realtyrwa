@@ -42,7 +42,7 @@ export default function NavigationControls({
   }, [onNavigate, canNavigateUp, canNavigateDown]);
 
   return (
-    <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-30">
+    <div className="fixed right-5 top-72 top-[275px] md:top-[355px] transform -translate-y-1/2 z-30">
       <div className="flex flex-col space-y-2">
         <motion.div
           whileHover={{ scale: 1.05 }}

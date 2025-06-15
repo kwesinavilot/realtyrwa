@@ -37,7 +37,7 @@ const actionConfig = {
 
 export default function AuthPrompt() {
   const { showAuthPrompt, authPromptAction, hideAuthPrompt } = useAppStore();
-  
+
   const config = actionConfig[authPromptAction as keyof typeof actionConfig] || actionConfig.invest;
   const Icon = config.icon;
 
@@ -52,15 +52,6 @@ export default function AuthPrompt() {
               exit={{ opacity: 0, scale: 0.8 }}
               className="relative"
             >
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={hideAuthPrompt}
-                className="absolute -top-2 -right-2 text-slate-400 hover:text-white"
-              >
-                <X className="w-4 h-4" />
-              </Button>
-
               <Card className="bg-transparent border-none shadow-none">
                 <CardHeader className="text-center pb-4">
                   <div className={`w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-4 ${config.color}`}>
@@ -74,17 +65,17 @@ export default function AuthPrompt() {
                   <p className="text-slate-400">
                     {config.description}
                   </p>
-                  
+
                   <div className="space-y-3">
                     <Link href="/auth/signup" onClick={hideAuthPrompt}>
-                      <Button className="w-full bg-indigo-600 hover:bg-indigo-700" size="lg">
+                      <Button className="w-full bg-indigo-600 hover:bg-indigo-700 mb-3" size="lg">
                         Create Account
                       </Button>
                     </Link>
-                    
+
                     <Link href="/auth/login" onClick={hideAuthPrompt}>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="w-full border-slate-700 text-slate-300 hover:bg-slate-800"
                         size="lg"
                       >
@@ -92,8 +83,8 @@ export default function AuthPrompt() {
                       </Button>
                     </Link>
                   </div>
-                  
-                  <p className="text-xs text-slate-500">
+
+                  <p className="text-xs text-slate-400">
                     Join thousands of investors building their real estate portfolio
                   </p>
                 </CardContent>

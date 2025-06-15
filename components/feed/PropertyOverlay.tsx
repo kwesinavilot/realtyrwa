@@ -38,15 +38,15 @@ export default function PropertyOverlay({ property }: PropertyOverlayProps) {
 
         {/* Property Stats */}
         <div className="grid grid-cols-3 gap-4 mb-4">
-          <div className="text-center">
+          <div className="text-left">
             <div className="text-white font-semibold">{formatCurrency(property.sharePrice)}</div>
             <div className="text-xs text-slate-400">Per Share</div>
           </div>
-          <div className="text-center">
+          <div className="text-left">
             <div className="text-white font-semibold">{property.roi}</div>
             <div className="text-xs text-slate-400">Expected ROI</div>
           </div>
-          <div className="text-center">
+          <div className="text-left">
             <div className={`font-semibold ${getRiskColor(property.riskLevel)}`}>
               {property.riskLevel}
             </div>

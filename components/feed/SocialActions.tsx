@@ -8,6 +8,7 @@ import { useAppStore } from '@/lib/store';
 import { Property } from '@/lib/types';
 import { formatNumber } from '@/lib/web3';
 import { cn } from '@/lib/utils';
+import { toast } from "sonner"
 
 interface SocialActionsProps {
   property: Property;
@@ -38,7 +39,12 @@ export default function SocialActions({ property }: SocialActionsProps) {
     } else {
       // Fallback to clipboard
       navigator.clipboard.writeText(window.location.href);
+      toast('Link copied to clipboard!');
     }
+  };
+
+  const handleComment = () => {
+    // TODO: Implement comments
   };
 
   const actionItems = [
@@ -52,7 +58,7 @@ export default function SocialActions({ property }: SocialActionsProps) {
     {
       icon: MessageCircle,
       label: formatNumber(property.comments),
-      onClick: () => {}, // TODO: Implement comments
+      onClick: handleComment,
       isActive: false,
       activeColor: 'text-blue-500',
     },
@@ -66,7 +72,7 @@ export default function SocialActions({ property }: SocialActionsProps) {
   ];
 
   return (
-    <div className="fixed right-4 bottom-24 z-30">
+    <div className="fixed right-4 bottom-60 md:bottom-24 z-30">
       <div className="flex flex-col space-y-4">
         {/* Social Actions */}
         {actionItems.map((item, index) => {

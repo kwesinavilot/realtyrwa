@@ -27,7 +27,7 @@ export default function AIScoreBadge({
     >
       <Badge 
         className={cn(
-          "flex items-center space-x-1 text-white font-semibold",
+          "flex items-center space-x-1 text-left px-0 text-white font-semibold",
           color
         )}
       >

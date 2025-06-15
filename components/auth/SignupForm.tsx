@@ -19,10 +19,7 @@ const signupSchema = z.object({
   username: z.string().min(3, 'Username must be at least 3 characters').regex(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores'),
   email: z.string().email('Please enter a valid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
-  confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
+  // confirmPassword: z.string()
 });
 
 export default function SignupForm() {
@@ -38,23 +35,32 @@ export default function SignupForm() {
   } = useForm<SignupData>({
     resolver: zodResolver(signupSchema)
   });
+  console.log('Form errors:', errors);
 
   const onSubmit = async (data: SignupData) => {
+    console.log('Form submitted with data:', data); // Add this line
     setIsLoading(true);
     setError('');
 
     try {
+      console.log('Calling signup...'); // Add this line
       await signup(data);
+      console.log('Signup successful, redirecting...'); // Add this line
       router.push('/feed');
     } catch (err) {
+      console.error('Signup error:', err); // Add this line
       setError('Failed to create account. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={(e) => {
+      console.log('Form submit event triggered');
+      handleSubmit(onSubmit)(e);
+    }} className="space-y-6">
       {error && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -132,7 +138,7 @@ export default function SignupForm() {
           )}
         </div>
 
-        <div className="space-y-2">
+        {/* <div className="space-y-2">
           <Label htmlFor="confirmPassword" className="text-white">Confirm Password</Label>
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -147,7 +153,7 @@ export default function SignupForm() {
           {errors.confirmPassword && (
             <p className="text-red-400 text-sm">{errors.confirmPassword.message}</p>
           )}
-        </div>
+        </div> */}
       </div>
 
       <Button

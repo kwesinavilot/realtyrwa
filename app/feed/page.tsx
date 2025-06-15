@@ -10,14 +10,15 @@ import InvestmentPanel from '@/components/feed/InvestmentPanel';
 import NavigationControls from '@/components/feed/NavigationControls';
 import SocialActions from '@/components/feed/SocialActions';
 import { Loader2 } from 'lucide-react';
+import Header from '@/components/shared/Header';
 
 export default function FeedPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const { 
-    properties, 
-    setProperties, 
-    videoPlayer, 
-    setCurrentVideoIndex 
+  const {
+    properties,
+    setProperties,
+    videoPlayer,
+    setCurrentVideoIndex
   } = useAppStore();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function FeedPage() {
 
   const handleNavigation = (direction: 'up' | 'down') => {
     const currentIndex = videoPlayer.currentIndex;
-    
+
     if (direction === 'down' && currentIndex < properties.length - 1) {
       setCurrentVideoIndex(currentIndex + 1);
     } else if (direction === 'up' && currentIndex > 0) {
@@ -87,52 +88,56 @@ export default function FeedPage() {
   const currentProperty = properties[videoPlayer.currentIndex];
 
   return (
-    <div className="relative h-screen overflow-hidden bg-black">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={videoPlayer.currentIndex}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.3 }}
-          className="absolute inset-0"
-        >
-          <VideoPlayer
-            property={currentProperty}
-            isActive={true}
-            onVideoEnd={handleVideoEnd}
-          />
-          
-          <PropertyOverlay property={currentProperty} />
-        </motion.div>
-      </AnimatePresence>
+    <>
+      <Header />
 
-      {/* Navigation Controls */}
-      <NavigationControls
-        onNavigate={handleNavigation}
-        canNavigateUp={videoPlayer.currentIndex > 0}
-        canNavigateDown={videoPlayer.currentIndex < properties.length - 1}
-      />
+      <div className="relative h-screen overflow-hidden bg-black">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={videoPlayer.currentIndex}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0"
+          >
+            <VideoPlayer
+              property={currentProperty}
+              isActive={true}
+              onVideoEnd={handleVideoEnd}
+            />
 
-      {/* Social Actions */}
-      <SocialActions property={currentProperty} />
+            <PropertyOverlay property={currentProperty} />
+          </motion.div>
+        </AnimatePresence>
 
-      {/* Investment Panel */}
-      <InvestmentPanel />
+        {/* Navigation Controls */}
+        <NavigationControls
+          onNavigate={handleNavigation}
+          canNavigateUp={videoPlayer.currentIndex > 0}
+          canNavigateDown={videoPlayer.currentIndex < properties.length - 1}
+        />
 
-      {/* Video Index Indicator */}
-      <div className="fixed top-24 right-4 z-30">
+        {/* Social Actions */}
+        <SocialActions property={currentProperty} />
+
+        {/* Investment Panel */}
+        <InvestmentPanel />
+
+        {/* Video Index Indicator */}
+        {/* <div className="fixed top-24 right-4 z-30">
         <div className="bg-black/50 rounded-full px-3 py-1 text-sm text-white">
           {videoPlayer.currentIndex + 1} / {properties.length}
         </div>
-      </div>
+      </div> */}
 
-      {/* Keyboard Shortcuts Info */}
-      <div className="fixed bottom-4 left-4 z-30">
+        {/* Keyboard Shortcuts Info */}
+        {/* <div className="fixed bottom-4 left-4 z-30 sm:hidden md:block">
         <div className="bg-black/50 rounded-lg p-3 text-xs text-white/70">
           <div>↑↓ Navigate • Space Play/Pause</div>
         </div>
+      </div> */}
       </div>
-    </div>
+    </>
   );
 }

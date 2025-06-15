@@ -54,7 +54,7 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -165,9 +165,9 @@ export default function Header() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="md:hidden bg-slate-900 border-t border-slate-800"
+          className="backdrop-blur-md border-slate-800 md:hidden"
         >
-          <div className="px-4 py-2 space-y-1">
+          <div className="px-4 pt-3 pb-4 space-y-1">
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
@@ -179,7 +179,7 @@ export default function Header() {
                   className={cn(
                     "flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium",
                     isActive
-                      ? "text-indigo-400 bg-indigo-500/10"
+                      ? "text-indigo-400 bg-primary"
                       : "text-slate-300 hover:text-white hover:bg-slate-800"
                   )}
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -209,12 +209,13 @@ export default function Header() {
                 </Button>
               </div>
             ) : (
-              <div className="pt-2 mt-2 border-t border-slate-800 space-y-2">
+              <div className="pt-2 mt-2 border-t border-slate-800 space-y-3">
                 <Link href="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="ghost" className="w-full justify-start text-slate-300 hover:text-white">
+                  <Button variant="ghost" className="w-full justify-start text-slate-300 hover:text-white mb-2">
                     Login
                   </Button>
                 </Link>
+
                 <Link href="/auth/signup" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button className="w-full bg-indigo-600 hover:bg-indigo-700">
                     Sign Up
