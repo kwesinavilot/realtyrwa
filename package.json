@@ -1,6 +1,15 @@
 {
   "name": "realty-rwa-social",
-  "version": "0.1.0",
+  "version": "0.4.0",
+  "description": "RealtyRWA - Invest as you scroll",
+  "keywords": ["realty", "rwa", "invest", "social", "real estate"],
+  "author": "Andrews Kwesi Ankomahene",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kwesinavilot/realtyrwa"
+  },
+  "homepage": "https://realtyrwa.vercel.app",
   "private": true,
   "scripts": {
     "dev": "next dev",

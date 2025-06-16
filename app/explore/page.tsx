@@ -122,13 +122,13 @@ export default function ExplorePage() {
                   className="pl-10 bg-slate-800 border-slate-700 text-white"
                 />
               </div>
-              <Button
+              {/* <Button
                 variant="outline"
-                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+                className="border-slate-700 text-white bg-transparent hover:bg-indigo-700 hover:text-white"
               >
                 <Filter className="w-4 h-4 mr-2" />
                 Advanced Filters
-              </Button>
+              </Button> */}
             </div>
 
             {/* Filter Tabs */}
@@ -147,7 +147,7 @@ export default function ExplorePage() {
                   className={
                     selectedFilter === filter.key
                       ? "bg-indigo-600 hover:bg-indigo-700"
-                      : "border-slate-700 text-slate-300 hover:bg-slate-800"
+                      : "border-slate-700 text-white bg-transparent hover:bg-indigo-700 hover:text-white"
                   }
                 >
                   {filter.label}
@@ -241,7 +241,7 @@ export default function ExplorePage() {
 
                     <div className="flex gap-2">
                       <Link href={`/property/${property.id}`} className="flex-1">
-                        <Button variant="outline" className="w-full border-slate-700 text-slate-300 hover:bg-slate-700">
+                        <Button variant="outline" className="w-full border-slate-700 text-indigo-600 hover:bg-indigo-700 hover:text-white">
                           View Details
                         </Button>
                       </Link>

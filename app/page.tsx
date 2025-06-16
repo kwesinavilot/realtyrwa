@@ -134,9 +134,9 @@ export default function HomePage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-slate-700 text-slate-300 hover:bg-slate-800 px-8 py-4 text-lg"
+                    className="bg-transparent border-2 border-white hover:bg-indigo-600 hover:text-white hover:border-indigo-600 text-white px-8 py-4 text-lg"
                   >
-                    {isAuthenticated ? "Go to Feed" : "Get Started"}
+                    {isAuthenticated ? "Go To Feed" : "Get Started"}
                     <ChevronRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>

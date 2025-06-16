@@ -102,7 +102,7 @@ export default function PropertyDetailPage() {
               <Button
                 variant="ghost"
                 onClick={() => router.back()}
-                className="text-slate-300 hover:text-white"
+                className="text-slate-300 hover:text-indigo-600"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
@@ -112,11 +112,12 @@ export default function PropertyDetailPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-slate-700 text-slate-300 hover:bg-slate-700"
+                  className="border-slate-700 text-md text-white bg-transparent hover:bg-white hover:text-indigo-600"
                 >
                   <Share className="w-4 h-4 mr-2" />
                   Share
                 </Button>
+                
                 <Button
                   onClick={() => openInvestmentPanel(property)}
                   className="bg-indigo-600 hover:bg-indigo-700"

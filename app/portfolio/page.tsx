@@ -87,7 +87,7 @@ function PortfolioPageContent() {
 
               <Button
                 variant="outline"
-                className="border-slate-700 text-slate-300 hover:bg-slate-800"
+                className="border-white bg-transparent text-white flex items-center hover:border-indigo-600 hover:bg-indigo-600 hover:text-white"
               >
                 <Filter className="w-4 h-4 mr-2" />
                 Filter
@@ -209,13 +209,13 @@ function PortfolioPageContent() {
           >
             <Tabs defaultValue="investments" className="space-y-6">
               <TabsList className="bg-slate-800 border-slate-700">
-                <TabsTrigger value="investments" className="data-[state=active]:bg-slate-700">
+                <TabsTrigger value="investments" className="data-[state=active]:bg-white">
                   My Investments ({user.investments.length})
                 </TabsTrigger>
-                <TabsTrigger value="watchlist" className="data-[state=active]:bg-slate-700">
+                <TabsTrigger value="watchlist" className="data-[state=active]:bg-white">
                   Watchlist (0)
                 </TabsTrigger>
-                <TabsTrigger value="history" className="data-[state=active]:bg-slate-700">
+                <TabsTrigger value="history" className="data-[state=active]:bg-white">
                   Transaction History
                 </TabsTrigger>
               </TabsList>

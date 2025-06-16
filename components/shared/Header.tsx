@@ -61,7 +61,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
@@ -99,7 +99,7 @@ export default function Header() {
             variant="ghost"
             size="sm"
             onClick={toggleChat}
-            className={`text-slate-300 hover:text-white ${isChatOpen ? 'bg-slate-800' : ''}`}
+            className={`text-slate-300 hover:text-white hover:bg-slate-800 ${isChatOpen ? 'bg-indigo-700' : ''}`}
           >
             <MessageCircle className="w-4 h-4 mr-2" />
             AI Assistant
@@ -115,7 +115,7 @@ export default function Header() {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center space-x-2 text-slate-300 hover:text-white">
+                    <Button variant="ghost" className="flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-slate-800">
                       <div className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">
                         <User className="w-4 h-4" />
                       </div>
@@ -211,10 +211,12 @@ export default function Header() {
                 <div className="flex items-center justify-between px-3 py-2 text-sm text-slate-300">
                   <span>Balance: {formatCurrency(user.balance)}</span>
                 </div>
-                <div className="flex items-center px-3 py-2 text-sm text-slate-300">
+                
+                <div className="flex items-center px-3 py-2 text-sm text-slate-300 hover:bg-indigo-600 hover:text-white">
                   <User className="w-4 h-4 mr-2" />
                   <span>{user.name}</span>
                 </div>
+                
                 <Button
                   variant="ghost"
                   onClick={handleLogout}

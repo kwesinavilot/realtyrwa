@@ -154,7 +154,7 @@ export default function InvestmentPanel() {
                           className={
                             investmentAmount === amount
                               ? "bg-indigo-600 hover:bg-indigo-700"
-                              : "border-slate-700 text-slate-300 hover:bg-slate-800"
+                              : "border-slate-700 text-white bg-transparent hover:bg-indigo-700 hover:text-white"
                           }
                         >
                           {formatCurrency(amount)}
