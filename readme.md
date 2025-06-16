@@ -19,11 +19,20 @@ RealtyRWA Social is a revolutionary web platform that combines the addictive scr
 - Auto-play videos as you scroll through properties
 - Immediate access - no signup required to browse
 
-### 🤖 **AI-Powered Investment Scoring**
-- Real-time engagement analysis (views, likes, comments)
+### 🤖 **AI-Powered Investment Intelligence**
+- **Real-time Property Analysis**: AI-powered investment scoring and risk assessment
+- **Smart Market Research**: Comprehensive market analysis with live data from global sources
+- **AI Chat Assistant**: 24/7 real estate investment advisor powered by Perplexity AI
+- **Predictive Analytics**: ROI predictions and market trend analysis
 - Color-coded investment opportunity badges (🔥 90-100, ⚡ 70-89, 📈 50-69, 📊 <50)
-- Smart recommendations based on user behavior
-- Risk assessment and ROI predictions
+
+### 📊 **Advanced Market Research**
+- **Dedicated Research Hub**: Comprehensive market analysis tools
+- **Multiple Research Modes**: Quick analysis, template-based research, and custom queries
+- **Global Market Coverage**: Real-time insights from markets worldwide
+- **Research Templates**: Pre-built analysis for market overview, investment hotspots, risk assessment, and rental analysis
+- **Research History**: Save and revisit previous market analyses
+- **Popular Markets**: One-click research for trending locations
 
 ### 💰 **Fractional Real Estate Investment**
 - Invest as little as $25 in premium properties
@@ -78,6 +87,12 @@ npm start
 - **Next.js 14** - React framework with App Router
 - **TypeScript** - Type-safe JavaScript
 - **React 18** - UI library with latest features
+
+
+### **AI & Analytics**
+- **Perplexity AI** - Real-time market research and analysis
+- **Custom AI Service** - Property analysis and investment scoring
+- **Real-time Data** - Live market insights and trends
 
 ### **Styling & UI**
 - **TailwindCSS** - Utility-first CSS framework
@@ -140,6 +155,8 @@ realtyrwa/
 ### **Anonymous Users**
 - ✅ Browse all properties and videos
 - ✅ View investment details and AI scores
+- ✅ Access basic market research
+- ✅ Use AI chat assistant (limited)
 - ✅ Explore different property types and locations
 - ❌ Cannot invest, like, comment, or upload
 - 💡 Gentle prompts to sign up for interactive features
@@ -149,7 +166,36 @@ realtyrwa/
 - ✅ Investment capabilities with portfolio tracking
 - ✅ Property upload and management
 - ✅ Social features (like, comment, share)
-- ✅ Personalized recommendations
+- ✅ Unlimited AI market research
+- ✅ Full AI chat assistant access
+- ✅ Personalized recommendations and analysis
+
+## 🤖 AI Features
+
+### **Market Research Hub** (`/market-research`)
+- **Quick Research**: Fast market overviews with key metrics
+- **Template Analysis**: Pre-built research for specific needs
+  - Market Overview: Comprehensive market analysis
+  - Investment Hotspots: Best areas for investment
+  - Risk Assessment: Market stability and risk factors
+  - Rental Market Analysis: Rental yields and demand
+- **Custom Research**: User-defined analysis queries
+- **Research History**: Save and revisit previous analyses
+- **Global Coverage**: Real-time data from worldwide markets
+
+### **AI Chat Assistant**
+- 24/7 real estate investment advisor
+- Context-aware conversations about properties
+- Market trend analysis and predictions
+- Investment strategy recommendations
+- Portfolio optimization advice
+
+### **Property Analysis**
+- Real-time AI scoring of investment opportunities
+- Risk assessment and ROI predictions
+- Market comparison and competitive analysis
+- Investment recommendations based on user profile
+
 
 ## 🔐 Authentication Flow
 
@@ -187,6 +233,15 @@ const calculateAIScore = (property: Property) => {
 - **Custom Amount**: Any amount within available shares
 - **Portfolio Tracking**: Real-time value and ROI updates
 - **Risk Assessment**: Low, Medium, High risk categorization
+
+## 🌍 Market Coverage
+
+### **Supported Regions**
+- **Africa**: Nigeria (Lagos), Ghana (Accra), Kenya (Nairobi), Egypt (Cairo), South Africa (Cape Town)
+- **North America**: United States (New York, Miami, Austin), Canada
+- **Europe**: United Kingdom, Germany, France
+- **Asia**: Singapore, Dubai, India
+- **Custom Locations**: Any location worldwide via AI research
 
 ## 🚀 Deployment
 
