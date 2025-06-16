@@ -155,9 +155,7 @@ export default function HomePage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-                See What's Available
-              </h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">See What's Available</h2>
               <p className="text-xl text-slate-400 max-w-2xl mx-auto">
                 Browse through premium real estate opportunities from across the country
               </p>
