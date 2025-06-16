@@ -18,8 +18,7 @@ const signupSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   username: z.string().min(3, 'Username must be at least 3 characters').regex(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores'),
   email: z.string().email('Please enter a valid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  // confirmPassword: z.string()
+  password: z.string().min(6, 'Password must be at least 6 characters')
 });
 
 export default function SignupForm() {
@@ -137,23 +136,6 @@ export default function SignupForm() {
             <p className="text-red-400 text-sm">{errors.password.message}</p>
           )}
         </div>
-
-        {/* <div className="space-y-2">
-          <Label htmlFor="confirmPassword" className="text-white">Confirm Password</Label>
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <Input
-              id="confirmPassword"
-              type="password"
-              {...register('confirmPassword')}
-              className="pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
-              placeholder="Confirm your password"
-            />
-          </div>
-          {errors.confirmPassword && (
-            <p className="text-red-400 text-sm">{errors.confirmPassword.message}</p>
-          )}
-        </div> */}
       </div>
 
       <Button

@@ -1,8 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import AuthPrompt from '@/components/shared/AuthPrompt';
-import { Toaster } from "@/components/ui/sonner"
 import AIChat from '@/components/ai/AIChat';
 
 const inter = Inter({ subsets: ['latin'] });

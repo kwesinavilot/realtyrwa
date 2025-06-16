@@ -202,8 +202,6 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ 
       user: updatedUser, 
       properties: updatedProperties,
-      // isInvestmentPanelOpen: false,
-      // selectedProperty: null
     });
   },
   
@@ -244,8 +242,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   // AI Actions
   toggleChat: () => set((state) => ({ isChatOpen: !state.isChatOpen })),
   
-  addChatMessage: (message) => 
-    set((state) => ({ chatMessages: [...state.chatMessages, message] })),
+  addChatMessage: (message) => set((state) => ({ chatMessages: [...state.chatMessages, message] })),
   
   clearChat: () => set({ chatMessages: [] }),
   
@@ -280,7 +277,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       const propertyData = {
         propertyId: property.id,
         location: property.location,
-        propertyType: 'residential', // You can make this dynamic
+        propertyType: 'residential',
         price: property.totalValue,
         features: [property.description]
       };

@@ -44,7 +44,7 @@ export default function SocialActions({ property }: SocialActionsProps) {
   };
 
   const handleComment = () => {
-    // TODO: Implement comments
+    toast('Comments!');
   };
 
   const actionItems = [

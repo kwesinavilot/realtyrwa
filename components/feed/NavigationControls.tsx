@@ -32,7 +32,6 @@ export default function NavigationControls({
           break;
         case ' ':
           e.preventDefault();
-          // Handle play/pause through video player
           break;
       }
     };

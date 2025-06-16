@@ -7,8 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { X, DollarSign, TrendingUp, Users, Loader2, CheckCircle } from 'lucide-react';
+import { X, DollarSign, TrendingUp, Loader2, CheckCircle } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import { formatCurrency, formatNumber } from '@/lib/web3';
 import { getRiskColor } from '@/lib/ai';
@@ -18,10 +17,10 @@ export default function InvestmentPanel() {
   const [investmentAmount, setInvestmentAmount] = useState(250);
   const [isInvesting, setIsInvesting] = useState(false);
   const [investmentComplete, setInvestmentComplete] = useState(false);
-  
-  const { 
-    isInvestmentPanelOpen, 
-    selectedProperty, 
+
+  const {
+    isInvestmentPanelOpen,
+    selectedProperty,
     user,
     closeInvestmentPanel,
     makeInvestment
@@ -37,16 +36,16 @@ export default function InvestmentPanel() {
 
   const handleInvest = async () => {
     if (!user || totalCost > user.balance) return;
-    
+
     setIsInvesting(true);
-    
+
     // Simulate investment process
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     makeInvestment(selectedProperty.id, totalCost, shares);
     setIsInvesting(false);
     setInvestmentComplete(true);
-    
+
     // Auto-close after success
     setTimeout(() => {
       setInvestmentComplete(false);
@@ -66,7 +65,7 @@ export default function InvestmentPanel() {
             className="fixed inset-0 bg-black/50 z-40"
             onClick={closeInvestmentPanel}
           />
-          
+
           {/* Panel */}
           <motion.div
             initial={{ x: '100%' }}
@@ -143,7 +142,7 @@ export default function InvestmentPanel() {
                   {/* Investment Amount */}
                   <div className="space-y-4 mb-6">
                     <Label className="text-white">Investment Amount</Label>
-                    
+
                     {/* Quick Amount Buttons */}
                     <div className="flex flex-wrap gap-2">
                       {quickAmounts.map((amount) => (
@@ -196,9 +195,8 @@ export default function InvestmentPanel() {
                         </div>
                         <div className="flex justify-between pt-2 border-t border-slate-700">
                           <span className="text-slate-400">Remaining balance</span>
-                          <span className={`font-semibold ${
-                            (user?.balance || 0) - totalCost >= 0 ? 'text-green-500' : 'text-red-500'
-                          }`}>
+                          <span className={`font-semibold ${(user?.balance || 0) - totalCost >= 0 ? 'text-green-500' : 'text-red-500'
+                            }`}>
                             {formatCurrency((user?.balance || 0) - totalCost)}
                           </span>
                         </div>
