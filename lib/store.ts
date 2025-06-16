@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Property, User, VideoPlayerState, Investment, LoginCredentials, SignupData } from './types';
+import { Property, User, VideoPlayerState, Investment, LoginCredentials, SignupData, Message } from './types';
 
 interface AppState {
   // Auth state
@@ -18,6 +18,12 @@ interface AppState {
   showAuthPrompt: boolean;
   authPromptAction: string;
   
+  // AI Chat state
+  chatMessages: Message[];
+  isChatOpen: boolean;
+  isAnalyzing: boolean;
+  currentAnalysis: string | null;
+  
   // Actions
   login: (credentials: LoginCredentials) => Promise<void>;
   signup: (userData: SignupData) => Promise<void>;
@@ -35,6 +41,18 @@ interface AppState {
   incrementViews: (propertyId: string) => void;
   showAuthPromptModal: (action: string) => void;
   hideAuthPrompt: () => void;
+  
+  // AI Actions
+  toggleChat: () => void;
+  addChatMessage: (message: Message) => void;
+  clearChat: () => void;
+  setAnalyzing: (analyzing: boolean) => void;
+  setCurrentAnalysis: (analysis: string | null) => void;
+  
+  // API calls
+  conductMarketResearch: (location: string, options?: any) => Promise<string>;
+  analyzeProperty: (property: Property) => Promise<string>;
+  sendChatMessage: (message: string) => Promise<string>;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -54,6 +72,12 @@ export const useAppStore = create<AppState>((set, get) => ({
   selectedProperty: null,
   showAuthPrompt: false,
   authPromptAction: '',
+  
+  // AI Chat state
+  chatMessages: [],
+  isChatOpen: false,
+  isAnalyzing: false,
+  currentAnalysis: null,
   
   // Auth actions
   login: async (credentials: LoginCredentials) => {
@@ -178,8 +202,8 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ 
       user: updatedUser, 
       properties: updatedProperties,
-      isInvestmentPanelOpen: false,
-      selectedProperty: null
+      // isInvestmentPanelOpen: false,
+      // selectedProperty: null
     });
   },
   
@@ -216,4 +240,98 @@ export const useAppStore = create<AppState>((set, get) => ({
   hideAuthPrompt: () => {
     set({ showAuthPrompt: false, authPromptAction: '' });
   },
+  
+  // AI Actions
+  toggleChat: () => set((state) => ({ isChatOpen: !state.isChatOpen })),
+  
+  addChatMessage: (message) => 
+    set((state) => ({ chatMessages: [...state.chatMessages, message] })),
+  
+  clearChat: () => set({ chatMessages: [] }),
+  
+  setAnalyzing: (analyzing) => set({ isAnalyzing: analyzing }),
+  
+  setCurrentAnalysis: (analysis) => set({ currentAnalysis: analysis }),
+  
+  // API calls
+  conductMarketResearch: async (location, options) => {
+    set({ isAnalyzing: true });
+    try {
+      const response = await fetch('/api/market-research', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ location, options })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      
+      set({ currentAnalysis: data.analysis });
+      return data.analysis;
+    } catch (error: any) {
+      throw new Error(error.message);
+    } finally {
+      set({ isAnalyzing: false });
+    }
+  },
+  
+  analyzeProperty: async (property) => {
+    set({ isAnalyzing: true });
+    try {
+      const propertyData = {
+        propertyId: property.id,
+        location: property.location,
+        propertyType: 'residential', // You can make this dynamic
+        price: property.totalValue,
+        features: [property.description]
+      };
+      
+      const response = await fetch('/api/property-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(propertyData)
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      
+      return data.analysis;
+    } catch (error: any) {
+      throw new Error(error.message);
+    } finally {
+      set({ isAnalyzing: false });
+    }
+  },
+  
+  sendChatMessage: async (message) => {
+    const state = get();
+    const userMessage: Message = { role: 'user', content: message };
+    
+    // Add user message immediately
+    set({ chatMessages: [...state.chatMessages, userMessage] });
+    
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message, 
+          history: state.chatMessages.slice(-10) // Last 10 messages for context
+        })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      
+      const aiMessage: Message = { role: 'assistant', content: data.response };
+      set((state) => ({ chatMessages: [...state.chatMessages, aiMessage] }));
+      
+      return data.response;
+    } catch (error: any) {
+      // Add error message to chat
+      const errorMessage: Message = { 
+        role: 'assistant', 
+        content: `Sorry, I encountered an error: ${error.message}` 
+      };
+      set((state) => ({ chatMessages: [...state.chatMessages, errorMessage] }));
+      throw error;
+    }
+  }
 }));

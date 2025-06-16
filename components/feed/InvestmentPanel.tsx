@@ -51,7 +51,7 @@ export default function InvestmentPanel() {
     setTimeout(() => {
       setInvestmentComplete(false);
       closeInvestmentPanel();
-    }, 2000);
+    }, 3000);
   };
 
   return (

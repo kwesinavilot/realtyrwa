@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import AuthPrompt from '@/components/shared/AuthPrompt';
 import { Toaster } from "@/components/ui/sonner"
+import AIChat from '@/components/ai/AIChat';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,13 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} min-h-screen bg-slate-900 text-slate-100`}>
-        <main className="pt-0">
-          {children}
-        </main>
-        <AuthPrompt />
-        <Toaster />
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
+        <AIChat />
       </body>
     </html>
   );

@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import InvestmentPanel from '@/components/feed/InvestmentPanel';
+
 import {
   Search,
   Filter,
@@ -28,7 +30,7 @@ export default function ExplorePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
-  const { properties, setProperties, showAuthPromptModal, isAuthenticated } = useAppStore();
+  const { properties, setProperties, showAuthPromptModal, isAuthenticated, openInvestmentPanel } = useAppStore();
 
   useEffect(() => {
     const loadProperties = async () => {
@@ -63,6 +65,14 @@ export default function ExplorePage() {
       return;
     }
     // Handle like logic for authenticated users
+  };
+
+  const handleInvest = (property: Property) => {
+    if (!isAuthenticated) {
+      showAuthPromptModal('invest');
+    } else {
+      openInvestmentPanel(property);
+    }
   };
 
   if (isLoading) {
@@ -237,11 +247,7 @@ export default function ExplorePage() {
                       </Link>
                       <Button
                         className="bg-indigo-600 hover:bg-indigo-700"
-                        onClick={() => {
-                          if (!isAuthenticated) {
-                            showAuthPromptModal('invest');
-                          }
-                        }}
+                        onClick={() => handleInvest(property)}
                       >
                         <TrendingUp className="w-4 h-4" />
                       </Button>
@@ -269,6 +275,8 @@ export default function ExplorePage() {
           )}
         </div>
       </div>
+
+      <InvestmentPanel />
     </>
   );
 }

@@ -64,3 +64,8 @@ export interface InvestmentFormData {
   amount: number;
   shares: number;
 }
+
+export interface Message {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+}

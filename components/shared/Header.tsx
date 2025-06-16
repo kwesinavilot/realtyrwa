@@ -6,17 +6,18 @@ import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Home, 
-  PlayCircle, 
-  Upload, 
-  Wallet, 
+import {
+  Home,
+  PlayCircle,
+  Upload,
+  Wallet,
   User,
   Menu,
   X,
   Search,
   LogOut,
-  Settings
+  Settings,
+  BarChart3
 } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
 import { formatWalletAddress, formatCurrency } from '@/lib/web3';
@@ -28,23 +29,28 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { MessageCircle } from 'lucide-react';
 
 const publicNavigation = [
   { name: 'For You', href: '/feed', icon: PlayCircle },
   { name: 'Explore', href: '/explore', icon: Search },
+  { name: 'Market Research', href: '/market-research', icon: BarChart3 },
 ];
 
 const authenticatedNavigation = [
   { name: 'For You', href: '/feed', icon: PlayCircle },
   { name: 'Explore', href: '/explore', icon: Search },
+  { name: 'Market Research', href: '/market-research', icon: BarChart3 },
   { name: 'Upload', href: '/upload', icon: Upload },
   { name: 'Portfolio', href: '/portfolio', icon: Wallet },
 ];
+
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { user, isAuthenticated, logout } = useAppStore();
+  const { toggleChat, isChatOpen } = useAppStore();
 
   const navigation = isAuthenticated ? authenticatedNavigation : publicNavigation;
 
@@ -70,7 +76,7 @@ export default function Header() {
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
-              
+
               return (
                 <Link
                   key={item.name}
@@ -89,6 +95,16 @@ export default function Header() {
             })}
           </nav>
 
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleChat}
+            className={`text-slate-300 hover:text-white ${isChatOpen ? 'bg-slate-800' : ''}`}
+          >
+            <MessageCircle className="w-4 h-4 mr-2" />
+            AI Assistant
+          </Button>
+
           {/* Auth Section */}
           <div className="flex items-center space-x-4">
             {isAuthenticated && user ? (
@@ -96,7 +112,7 @@ export default function Header() {
                 <Badge variant="secondary" className="bg-slate-800 text-slate-300">
                   {formatCurrency(user.balance)}
                 </Badge>
-                
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center space-x-2 text-slate-300 hover:text-white">
@@ -117,7 +133,7 @@ export default function Header() {
                       Settings
                     </DropdownMenuItem>
                     <DropdownMenuSeparator className="bg-slate-700" />
-                    <DropdownMenuItem 
+                    <DropdownMenuItem
                       onClick={handleLogout}
                       className="text-red-400 focus:bg-slate-700 focus:text-red-300"
                     >
@@ -171,7 +187,7 @@ export default function Header() {
             {navigation.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
-              
+
               return (
                 <Link
                   key={item.name}
@@ -189,7 +205,7 @@ export default function Header() {
                 </Link>
               );
             })}
-            
+
             {isAuthenticated && user ? (
               <div className="pt-2 mt-2 border-t border-slate-800 space-y-2">
                 <div className="flex items-center justify-between px-3 py-2 text-sm text-slate-300">
